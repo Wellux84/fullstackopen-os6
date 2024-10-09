@@ -10,28 +10,35 @@ const Anecdote = ({ anecdote, handleClick }) => {
   return (
     <div style={style}>
       <li>
-        {anecdote.content} has {anecdote.votes} votes
+        {anecdote.content}
+        </li>
+        <li>
+         has {anecdote.votes} votes
         <button onClick={handleClick}>vote</button>
       </li>
     </div>
   )
 }
 
-const Anecdotes = () => {
+const AnecdoteList = () => {
   const dispatch = useDispatch()
-  const anecdotes = useSelector(state => state.anecdotes) // Korjattu osa
+  const anecdotes = useSelector(state => state) 
+  const sortedAnecdotes = [...anecdotes].sort((a, b) => b.votes - a.votes)
+
 
   return (
-    <ul>
-      {anecdotes.map(anecdote =>
+    <div>
+    <ul style={{ listStyleType: 'none' }}>
+      {sortedAnecdotes.map(anecdote =>
         <Anecdote
           key={anecdote.id}
           anecdote={anecdote}
-          handleClick={() => dispatch(vote(anecdote.id))} // Korjattu osa
+          handleClick={() => dispatch(vote(anecdote.id))}
         />
       )}
     </ul>
+    </div>
   )
 }
 
-export default Anecdotes
+export default AnecdoteList

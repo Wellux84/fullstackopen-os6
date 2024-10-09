@@ -32,7 +32,7 @@ const reducer = (state = initialState, action) => {
       const asObjectToChange = state.find(n => n.id === id)
       const changedAsObject = {
         ...asObjectToChange,
-        vote: asObjectToChange.votes +1
+        votes: asObjectToChange.votes +1
       }
       return state.map(asObject =>
         asObject.id !== id ? asObject : changedAsObject
@@ -42,12 +42,12 @@ const reducer = (state = initialState, action) => {
     }
   }
 
-  export const createAnecdote = (content) => {
+  export const createAnecdote = (anecdote) => {
     return {
       type: 'NEW_ASOBJECT',
       payload: {
-        content,
-        vote: 0,
+        content: anecdote,
+        votes: 0,
         id: getId()
       }
     }
