@@ -1,5 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit'
 
+
 const anecdotesAtStart = [
   'If it hurts, do it more often',
   'Adding manpower to a late software project makes it later!',
@@ -8,7 +9,6 @@ const anecdotesAtStart = [
   'Premature optimization is the root of all evil.',
   'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.'
 ]
-
 const getId = () => (100000 * Math.random()).toFixed(0)
 
 const asObject = (anecdote) => {
@@ -25,7 +25,7 @@ const initialState = anecdotesAtStart.map(asObject)
 
 const anecdoteSlice = createSlice({
   name: 'anecdotes',
-  initialState: initialState,
+  initialState: [],
   reducers: {
     vote(state, action) {
       const id = action.payload
@@ -43,9 +43,12 @@ const anecdoteSlice = createSlice({
     },
     createAnecdote(state, action) {
       state.push(action.payload)
-    }
+    },
+    appendAnecdote(state, action) {
+      state.push(action.payload)
+    },
   }
 })
 
-export const { vote, setAnecdotes, createAnecdote } = anecdoteSlice.actions
+export const { vote, setAnecdotes, createAnecdote, appendAnecdote } = anecdoteSlice.actions
 export default anecdoteSlice.reducer
